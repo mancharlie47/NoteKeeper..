@@ -33,7 +33,7 @@ public class MainActivity extends AppCompatActivity
     private LinearLayoutManager mNotesLayoutManager;
     private CourseRecyclerAdapter mCourseRecyclerAdapter;
     private GridLayoutManager mCoursesLayoutManager;
-    private NoteKeeperOpenHelper mDbOpenHelper;
+ //   private NoteKeeperOpenHelper mDbOpenHelper;
 
 
     @Override
@@ -42,7 +42,7 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        mDbOpenHelper = new NoteKeeperOpenHelper(this);
+      //  mDbOpenHelper = new NoteKeeperOpenHelper(this);
 
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -67,11 +67,6 @@ public class MainActivity extends AppCompatActivity
         initializeDisplayContent();
     }
 
-    @Override
-    protected void onDestroy() {
-        mDbOpenHelper.close();
-        super.onDestroy();
-    }
 
     @Override
     protected void onResume() {
@@ -80,7 +75,7 @@ public class MainActivity extends AppCompatActivity
     }
 
     private void initializeDisplayContent() {
-        DataManager.loadFromDatabase(mDbOpenHelper);
+   //     DataManager.loadFromDatabase(mDbOpenHelper);
         mRecyclerItems = (RecyclerView) findViewById(R.id.list_items);
         mNotesLayoutManager = new LinearLayoutManager(this);
         mCoursesLayoutManager = new GridLayoutManager(this,

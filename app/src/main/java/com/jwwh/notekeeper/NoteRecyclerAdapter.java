@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
 
 public class NoteRecyclerAdapter extends RecyclerView.Adapter<NoteRecyclerAdapter.ViewHolder>{
+    private static final String NOTE_POSITION = "com.jwwh.notekeeper.NOTE_POSITION";
     private final Context mContext;
     private final List<NoteInfo> mNotes;
     private final LayoutInflater mLayoutInflater;
@@ -33,7 +34,7 @@ public class NoteRecyclerAdapter extends RecyclerView.Adapter<NoteRecyclerAdapte
         NoteInfo note = mNotes.get(position);
         holder.mTextCourse.setText(note.getCourse().getTitle());
         holder.mTextTitle.setText(note.getTitle());
-        holder.mId = note.getId();
+        holder.mCurrentPosition = position;
 
     }
 
@@ -46,7 +47,7 @@ public class NoteRecyclerAdapter extends RecyclerView.Adapter<NoteRecyclerAdapte
 
         public final TextView mTextCourse;
         public final TextView mTextTitle;
-        public int mId;
+        public int mCurrentPosition;
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -54,10 +55,12 @@ public class NoteRecyclerAdapter extends RecyclerView.Adapter<NoteRecyclerAdapte
             mTextTitle = (TextView) itemView.findViewById(R.id.text_title);
 
             itemView.setOnClickListener(new View.OnClickListener() {
+
+
                 @Override
                 public void onClick(View v) {
                     Intent intent = new Intent (mContext, NoteActivity.class);
-                    intent.putExtra(NoteActivity.NOTE_ID, mId);
+                    intent.putExtra(NOTE_POSITION, mCurrentPosition);
                     mContext.startActivity(intent);
                 }
             });
